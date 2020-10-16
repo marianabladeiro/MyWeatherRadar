@@ -8,6 +8,8 @@ import weatherRadar.IpmaCityForecast;
 import weatherRadar.IpmaService;
 
 import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger; 
 
 /**
  * demonstrates the use of the IPMA API for weather forecast
@@ -15,6 +17,7 @@ import java.util.logging.Logger;
 public class App {
 
     private static final int CITY_ID_AVEIRO = 1010500;
+    protected static final Logger logger = LogManager.getLogger();
     /*
     loggers provide a better alternative to System.out.println
     https://rules.sonarsource.com/java/tag/bad-practice/RSPEC-106
