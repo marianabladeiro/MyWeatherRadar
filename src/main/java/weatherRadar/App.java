@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import weatherRadar.IpmaCityForecast;
 import weatherRadar.IpmaService;
 
-import java.util.logging.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger; 
 
@@ -16,13 +15,12 @@ import org.apache.logging.log4j.Logger;
  */
 public class App {
 
-    private static final int CITY_ID_AVEIRO = 1010500;
     protected static final Logger logger = LogManager.getLogger();
     /*
     loggers provide a better alternative to System.out.println
     https://rules.sonarsource.com/java/tag/bad-practice/RSPEC-106
      */
-    private static final Logger logger = Logger.getLogger(App.class.getName());
+
 
     public static void  main(String[] args ) {
 
@@ -35,6 +33,7 @@ public class App {
                 .build();
 
         IpmaService service = retrofit.create(IpmaService.class);
+		
         Call<IpmaCityForecast> callSync = service.getForecastForACity(Integer.parseInt(args[0]));
 
         try {
@@ -43,9 +42,9 @@ public class App {
 
             if (forecast != null) {
                 logger.info( "max temp for today: " + forecast.getData().
-                        listIterator().next().getTMax());
+                        listIterator().next().getTMax() + " ºC");
             } else {
-                logger.info( "No results!");
+                logger.error( "No results!");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
